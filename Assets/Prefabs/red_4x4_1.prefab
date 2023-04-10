@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 383915006882247}
   - component: {fileID: 5026281950307626630}
+  - component: {fileID: -2054677144727197647}
   m_Layer: 0
   m_Name: red_4x4_1
   m_TagString: Untagged
@@ -84,3 +85,16 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-2054677144727197647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3930453963124495766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6eb0144f06df94940a4d4bf343c14624, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  index: 0

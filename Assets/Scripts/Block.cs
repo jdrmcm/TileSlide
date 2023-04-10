@@ -2,28 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class Block
 {
-    private int[] pos = new int[2];
-    private GameObject type;
+    public int row;
+    public int column;
+    public int type;
+    public int index;
 
-    public void SetPosition(int[] input)
+    public Block(int type, int[] pos, int index)
     {
-        this.pos[0] = input[0];
-        this.pos[1] = input[1];
+        this.type = type;
+        this.row = pos[0];
+        this.column = pos[1];
+        this.index = index;
     }
 
     public int[] GetPosition()
     {
-        return this.pos;
+        int[] pos = new int[2];
+        pos[0] = this.row;
+        pos[1] = this.column;
+        return pos;
     }
 
-    public void SetTile(GameObject input)
-    {
-        this.type = input;
-    }
-
-    public GameObject GetTile()
+    public int GetTile()
     {
         return this.type;
     }

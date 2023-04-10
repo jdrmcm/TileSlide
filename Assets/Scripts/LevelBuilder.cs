@@ -1,28 +1,53 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class LevelBuilder : MonoBehaviour
 {
-    private Block[] level = new Block[20];
+    public int index = 0;
 
-    private int index = 0;
+    public List<Block> level = new List<Block>();
 
-    public void AddTile(GameObject type, int[] position)
+    [SerializeField] TMP_InputField inputField;
+
+    public void AddTile(int type, int[] position)
     {
-        Block block = new Block();
-        block.SetTile(type);
-        block.SetPosition(position);
-        level[index] = block;
+        Block block = new Block(type, position, index);
+        level.Add(block);
         index++;
+    }
+
+    public void RemoveTile(int[] position)
+    {
+        int index = 0;
+
+        for (int i = 0; i < level.Count; i++)
+        {
+            if (position[0] == level[i].row)
+            {
+                if (position[1] == level[i].column)
+                {
+                    index = level[i].index;
+                    level.RemoveAt(i);
+                }
+            }
+        }
+
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            GameObject tile = transform.GetChild(i).gameObject;
+
+            if (index == tile.GetComponent<TilePiece>().index)
+            {
+                Destroy(transform.GetChild(i).gameObject);
+            }
+        }
     }
 
     public void ClearLevel()
     {
-        for (int i = 0; i < level.Length; i++)
-        {
-            level[i] = null;
-        }
+        level.Clear();
 
         for (int i = 0; i < transform.childCount; i++)
         {
@@ -36,7 +61,7 @@ public class LevelBuilder : MonoBehaviour
     {
         bool occupied = false;
 
-        for (int i = 0; i < level.Length; i++)
+        for (int i = 0; i < level.Count; i++)
         {
             if (level[i] != null)
             {
@@ -50,5 +75,10 @@ public class LevelBuilder : MonoBehaviour
             }
         }
         return occupied;
+    }
+
+    public void SaveLevel()
+    {
+        FileHandler.SaveToJSON<Block>(level, inputField.text + ".dat");
     }
 }

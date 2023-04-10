@@ -9,6 +9,7 @@ public class GridPiece : MonoBehaviour
 
     private TMP_Dropdown dropdown;
     private LevelBuilder levelBuilder;
+    private GameObject saveScreen;
     private int[] pos = new int[2];
 
     private void Start()
@@ -18,18 +19,27 @@ public class GridPiece : MonoBehaviour
 
         dropdown = GameObject.Find("Dropdown").GetComponent<TMP_Dropdown>();
         levelBuilder = GameObject.Find("LevelBuilder").GetComponent<LevelBuilder>();
+        saveScreen = GameObject.Find("Canvas").transform.Find("SaveScreen").gameObject;
     }
 
     private void OnMouseDown()
     {
-        if (!levelBuilder.ContainsTile(pos))
+        if (!saveScreen.activeInHierarchy)
         {
-            int index = dropdown.value;
+            if (!levelBuilder.ContainsTile(pos))
+            {
+                int index = dropdown.value;
 
-            GameObject tile = Instantiate(objects[index], new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
-            tile.transform.SetParent(GameObject.Find("LevelBuilder").transform);
+                GameObject tile = Instantiate(objects[index], new Vector3(transform.position.x, transform.position.y, 0), Quaternion.identity);
+                tile.transform.SetParent(GameObject.Find("LevelBuilder").transform);
+                tile.GetComponent<TilePiece>().index = levelBuilder.index;
 
-            levelBuilder.AddTile(objects[index], pos);
+                levelBuilder.AddTile(index, pos);
+            }
+            else
+            {
+                levelBuilder.RemoveTile(pos);
+            }
         }
     }
 }
