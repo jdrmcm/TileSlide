@@ -11,22 +11,22 @@ public class LevelBuilder : MonoBehaviour
 
     [SerializeField] TMP_InputField inputField;
 
-    public void AddTile(int type, int[] position)
+    public void AddTile(int type, double[] position)
     {
         Block block = new Block(type, position, index);
         level.Add(block);
         index++;
     }
 
-    public void RemoveTile(int[] position)
+    public void RemoveTile(double[] position)
     {
         int index = 0;
 
         for (int i = 0; i < level.Count; i++)
         {
-            if (position[0] == level[i].row)
+            if (position[0] == level[i].xPos)
             {
-                if (position[1] == level[i].column)
+                if (position[1] == level[i].yPos)
                 {
                     index = level[i].index;
                     level.RemoveAt(i);
@@ -57,7 +57,7 @@ public class LevelBuilder : MonoBehaviour
         index = 0;
     }
 
-    public bool ContainsTile(int[] position)
+    public bool ContainsTile(double[] position)
     {
         bool occupied = false;
 

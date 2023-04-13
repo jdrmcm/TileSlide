@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//THIS IS ALL DEPRECATED!! ONLY HERE FOR REFERENCE
+
 public class GridController : MonoBehaviour
 {
     [SerializeField] private GameObject yellow;

@@ -5,24 +5,24 @@ using UnityEngine;
 [System.Serializable]
 public class Block
 {
-    public int row;
-    public int column;
+    public double xPos;
+    public double yPos;
     public int type;
     public int index;
 
-    public Block(int type, int[] pos, int index)
+    public Block(int type, double[] pos, int index)
     {
         this.type = type;
-        this.row = pos[0];
-        this.column = pos[1];
+        this.xPos = pos[0];
+        this.yPos = pos[1];
         this.index = index;
     }
 
-    public int[] GetPosition()
+    public double[] GetPosition()
     {
-        int[] pos = new int[2];
-        pos[0] = this.row;
-        pos[1] = this.column;
+        double[] pos = new double[2];
+        pos[0] = this.xPos;
+        pos[1] = this.yPos;
         return pos;
     }
 
